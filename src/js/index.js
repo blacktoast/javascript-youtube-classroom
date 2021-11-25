@@ -1,3 +1,4 @@
+import { BASE_URL } from "./utils/constant.js";
 import { API_KEY } from "./utils/env.js";
 
 const $searchButton = document.querySelector("#search-button");
@@ -14,5 +15,7 @@ const onModalClose = () => {
 
 $searchButton.addEventListener("click", onModalShow);
 $modalClose.addEventListener("click", onModalClose);
-let url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=KR&maxResults=25&key=${API_KEY}`;
-fetch(url).then((response) => console.log(response));
+let url = `${BASE_URL}part=snippet&q=${encodeURI("코코몽")}&key=${API_KEY}`;
+let t = await fetch(url);
+t = await t.json();
+console.log(t);
