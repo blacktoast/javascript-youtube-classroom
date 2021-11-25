@@ -12,3 +12,4 @@ const onModalClose = () => {
 
 $searchButton.addEventListener("click", onModalShow);
 $modalClose.addEventListener("click", onModalClose);
+console.log(%YOUTUBE_KEY%);
