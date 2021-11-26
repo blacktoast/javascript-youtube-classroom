@@ -1,4 +1,6 @@
+import { BASE_URL } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
+import { makeSearchQuery } from "../utils/makeQuery.js";
 import { hideElement, showElement } from "../utils/setAtribute.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
 
@@ -6,14 +8,16 @@ const $searchYoutubeForm = $(".search-youtube");
 const $searchButton = $(".search-btn");
 
 function onEmpty() {}
-function search() {
+function search(query) {
+  console.log(query);
   return new Promise((resolve, reject) => setTimeout(resolve, 1000));
 }
+
 export async function handlerSearchEvent() {
   let input = $(".search-input").value;
-  console.log(input);
+
   renderLoading();
-  await search();
+  await search(makeSearchQuery(input, BASE_URL));
   endLoading();
 }
 
