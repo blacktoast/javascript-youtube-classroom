@@ -1,1 +1,2 @@
-export const BASE_URL = "https://youtube.googleapis.com/youtube/v3/search?";
+export const BASE_URL =
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet";

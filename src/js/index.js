@@ -1,5 +1,7 @@
+import { initSearchEvent } from "./handler/searchYoutube.js";
 import { BASE_URL } from "./utils/constant.js";
 import { API_KEY } from "./utils/env.js";
+import { makeSearchQuery } from "./utils/makeQuery.js";
 
 const $searchButton = document.querySelector("#search-button");
 const $modalClose = document.querySelector(".modal-close");
@@ -12,10 +14,15 @@ const onModalShow = () => {
 const onModalClose = () => {
   $modal.classList.remove("open");
 };
-
+let query = {
+  q: encodeURI("유니클로"),
+  key: API_KEY,
+};
 $searchButton.addEventListener("click", onModalShow);
 $modalClose.addEventListener("click", onModalClose);
-let url = `${BASE_URL}part=snippet&q=${encodeURI("코코몽")}&key=${API_KEY}`;
-let t = await fetch(url);
-t = await t.json();
-console.log(t);
+let url = makeSearchQuery("하이", BASE_URL);
+
+function init() {
+  initSearchEvent();
+}
+init();
