@@ -33,6 +33,13 @@ a {
   display: none;
 }
 
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
 @keyframes skeleton-gradient {
   0% {
     background-color: rgba(165, 165, 165, 0.1);
