@@ -1,3 +1,4 @@
+import { MAX_SEARCH_NUMBER } from "./constant.js";
 import { API_KEY } from "./env.js";
 
 export function makeSearchQuery(search, base) {
@@ -12,6 +13,7 @@ export function makeSearchQuery(search, base) {
 function makeSearchQueryProperty(search) {
   let result = {
     q: encodeURI(search),
+    maxResults: MAX_SEARCH_NUMBER,
     key: API_KEY,
   };
   return result;

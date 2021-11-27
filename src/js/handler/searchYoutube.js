@@ -9,7 +9,11 @@ const $searchButton = $(".search-btn");
 
 function onEmpty() {}
 function search(query) {
-  console.log(query);
+  return fetch(query)
+    .then((response) => response.json())
+    .then((e) => {
+      console.log(JSON.stringify(e));
+    });
   return new Promise((resolve, reject) => setTimeout(resolve, 5000));
 }
 
