@@ -10,7 +10,7 @@ const $searchButton = $(".search-btn");
 function onEmpty() {}
 function search(query) {
   console.log(query);
-  return new Promise((resolve, reject) => setTimeout(resolve, 1000));
+  return new Promise((resolve, reject) => setTimeout(resolve, 5000));
 }
 
 export async function handlerSearchEvent() {
