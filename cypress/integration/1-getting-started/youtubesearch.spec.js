@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { YOUTUBE } from "../../../src/js/utils/constant.js";
+
 // Welcome to Cypress!
 //
 // This spec file contains a variety of sample tests
@@ -10,11 +12,10 @@
 // what makes it such an awesome testing tool,
 // please read our getting started guide:
 // https://on.cypress.io/introduction-to-cypress
-import { YOUTUBE } from "../../src/js/utils/constant.js";
 
 describe("유튜브 검색 테스트", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("132.226.18.9:5500");
     cy.get("#search-button").click();
   });
 
