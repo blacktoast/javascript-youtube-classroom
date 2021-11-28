@@ -1,4 +1,4 @@
-import { MAX_SEARCH_NUMBER } from "./constant.js";
+import { MAX_SEARCH_NUMBER, YOUTUBE } from "./constant.js";
 import { API_KEY } from "./env.js";
 
 export function makeSearchQuery(search, base) {
@@ -9,11 +9,10 @@ export function makeSearchQuery(search, base) {
   });
   return base + query;
 }
-
 function makeSearchQueryProperty(search) {
   let result = {
     q: encodeURI(search),
-    maxResults: MAX_SEARCH_NUMBER,
+    maxResults: YOUTUBE.MAX_NUMBER,
     key: API_KEY,
   };
   return result;
