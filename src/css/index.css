@@ -26,6 +26,9 @@ a {
   opacity: 1;
 }
 
+.scroll-none {
+  overflow: hidden;
+}
 .skeleton {
   background: linear-gradient(
     -45deg,

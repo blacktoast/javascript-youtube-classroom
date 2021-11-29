@@ -4,3 +4,10 @@ export const showElement = (tag) => {
 export const hideElement = (tag) => {
   tag.classList.add("d-none");
 };
+
+export const hideScroll = (tag) => {
+  tag.classList.add("scroll-none");
+};
+export const showScroll = (tag) => {
+  tag.classList.remove("scroll-none");
+};

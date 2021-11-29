@@ -55,9 +55,6 @@ function searchYoutubeForScrollDown(clips) {
   };
 
   let io = new IntersectionObserver((entries, observer) => {
-    console.log("object");
-    // IntersectionObserverEntry 객체 리스트와 observer 본인(self)를 받음
-    // 동작을 원하는 것 작성
     if (entries[0].isIntersecting) {
       setTimeout(renderYoutubeClip(videoData), 1000);
     }
