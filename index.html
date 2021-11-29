@@ -69,7 +69,7 @@
           <header>
             <h2 class="text-center">🔎 유튜브 검색</h2>
           </header>
-          <form class="d-flex search-youtube">
+          <form class="d-flex search-youtube youtube-search-modal__form">
             <input
               type="text"
               class="w-100 mr-2 pl-2 search-input"
@@ -78,7 +78,7 @@
             />
             <button
               type="button"
-              class="btn bg-cyan-500 search-btn"
+              class="btn bg-cyan-500 search-btn youtube-search-modal__submit"
               data-js="youtube-search-modal__submit"
             >
               검색
@@ -95,7 +95,7 @@
               저장된 영상 갯수: 50개
             </div>
             <section
-              class="d-none"
+              class="d-none youtube-search-modal__not-found"
               id="empty-wrapper"
               data-js="youtube-search-modal__not-found"
             >

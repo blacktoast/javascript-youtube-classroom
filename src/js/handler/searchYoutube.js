@@ -4,24 +4,24 @@ import { makeSearchQuery } from "../utils/makeQuery.js";
 import { hideElement, showElement } from "../utils/setAtribute.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
 
-const $searchYoutubeForm = $(".search-youtube");
-const $searchButton = $(".search-btn");
+const $searchYoutubeForm = $(".youtube-search-modal__form");
+const $searchButton = $(".youtube-search-modal__submit");
 
 function onEmpty() {}
-function search(query) {
-  return fetch(query)
-    .then((response) => response.json())
-    .then((e) => {
-      console.log(JSON.stringify(e));
-    });
-  return new Promise((resolve, reject) => setTimeout(resolve, 5000));
+async function search(query) {
+  const response = await fetch(query);
+  const e = await response.json();
+  console.log(e);
+  return e;
 }
 
 export async function handlerSearchEvent() {
-  let input = $(".search-input").value;
+  let input = $("[data-js=youtube-search-modal__input]").value;
 
   renderLoading();
-  await search(makeSearchQuery(input, BASE_URL));
+  let t;
+  t = await search(makeSearchQuery(input, BASE_URL));
+  console.log(t);
   endLoading();
 }
 
