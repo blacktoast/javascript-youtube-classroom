@@ -12,6 +12,7 @@ export function makeSearchQuery(search, base) {
 function makeSearchQueryProperty(search) {
   let result = {
     q: encodeURI(search),
+    type: "video",
     maxResults: YOUTUBE.MAX_NUMBER,
     key: API_KEY,
   };
