@@ -44,8 +44,8 @@ export function renderYoutubeClip(videoData) {
   videoData.map((item) => {
     template += htmlYoutubeClip(item);
   });
-  return new Promise(function (resolve, reject) {
-    resolve($youtubeClipWrapper.insertAdjacentHTML("afterbegin", template));
-  });
+
+  $youtubeClipWrapper.insertAdjacentHTML("afterbegin", template);
 }
+
 function renderEmptyResult() {}

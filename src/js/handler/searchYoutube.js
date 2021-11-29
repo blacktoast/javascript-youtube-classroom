@@ -8,11 +8,12 @@ import { renderYoutubeClip } from "../view/renderSearchModal.js";
 
 const $searchYoutubeForm = $(".youtube-search-modal__form");
 const $searchButton = $(".youtube-search-modal__submit");
-const $clips = document.querySelectorAll(".youtube-search-modal-clip");
 const $clipContainer = document.querySelector(".youtube-search-modal__clip");
 const lastClip = document.querySelector(
   ".youtube-search-modal-clip:last-child"
 );
+let videoData;
+
 function onEmpty() {}
 
 function getYoutubeVideoId(youtubeSearchData) {
@@ -30,46 +31,39 @@ function getYoutubeVideoId(youtubeSearchData) {
 
 async function search(query) {
   const mockYoutubeSearchData = await getMockYouTubeSearchData();
-  let e = getYoutubeVideoId(mockYoutubeSearchData);
+  let result = getYoutubeVideoId(mockYoutubeSearchData);
   //const response = await fetch(query);
-  //const e = await response.json();
-  return e;
+  //const result = getYoutubeVideoId(await response.json());
+  return result;
 }
 export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
-  let videoData;
   videoData = await search(makeSearchQuery(input, BASE_URL));
-  renderYoutubeClip(videoData).then(
-    lastClip.addEventListener("load", (e) => {
-      console.log("object");
-    })
-  );
-
+  renderYoutubeClip(videoData);
+  const $clips = document.querySelectorAll(".youtube-search-modal-clip");
+  searchYoutubeForScrollDown($clips);
   endLoading();
 }
 
-function searchYoutubeForScrollDown() {
-  console.log($clips, $clipContainer);
+function searchYoutubeForScrollDown(clips) {
+  console.log(clips, $clipContainer);
   let options = {
     root: document.querySelector(".youtube-search-modal__inner"),
     rootMargin: "0px",
-    threshold: [0, 0.5, 1],
+    threshold: 0.8,
   };
-  let observer = new IntersectionObserver((entries, observer) => {
+
+  let io = new IntersectionObserver((entries, observer) => {
     console.log("object");
     // IntersectionObserverEntry 객체 리스트와 observer 본인(self)를 받음
     // 동작을 원하는 것 작성
-    entries.forEach((entry) => {
-      // entry와 observer 출력
-      console.log("entry:", entry);
-      console.log("observer:", observer);
-    });
+    if (entries[0].isIntersecting) {
+      setTimeout(renderYoutubeClip(videoData), 1000);
+    }
   }, options);
 
-  $clips.forEach((e) => {
-    observer.observe(e);
-  });
+  io.observe(clips[clips.length - 1]);
 }
 
 export function initSearchEvent() {
