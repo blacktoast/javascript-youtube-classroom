@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="modal">
-        <div class="modal-inner p-8">
+        <div class="modal-inner p-8 youtube-search-modal__inner">
           <button class="modal-close">
             <svg viewbox="0 0 40 40">
               <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30" />
@@ -74,8 +74,13 @@
               type="text"
               class="w-100 mr-2 pl-2 search-input"
               placeholder="검색"
+              data-js="youtube-search-modal__input"
             />
-            <button type="button" class="btn bg-cyan-500 search-btn">
+            <button
+              type="button"
+              class="btn bg-cyan-500 search-btn"
+              data-js="youtube-search-modal__submit"
+            >
               검색
             </button>
           </form>
@@ -89,15 +94,22 @@
             <div class="d-flex justify-end text-gray-700">
               저장된 영상 갯수: 50개
             </div>
-            <section class="d-none" id="empty-wrapper">
+            <section
+              class="d-none"
+              id="empty-wrapper"
+              data-js="youtube-search-modal__not-found"
+            >
               <section class="empty">
                 <img src="/src/images/status/not_found.png" alt="" />
                 <h2>텅</h2>
               </section>
             </section>
             <section class="video-wrapper" id="view-video-wrapper">
-              <article class="clip">
-                <div class="preview-container">
+              <article class="clip" data-js="youtube-search-modal__clip">
+                <div
+                  class="preview-container"
+                  data-js="youtube-search-modal-clip__preview"
+                >
                   <iframe
                     width="100%"
                     height="118"
@@ -127,7 +139,11 @@
                 </div>
               </article>
             </section>
-            <section class="video-wrapper d-none" id="skeleton-wrapper">
+            <section
+              class="video-wrapper d-none"
+              id="skeleton-wrapper"
+              data-js="youtube-search-modal__skeleton-wrapper"
+            >
               <article class="clip">
                 <div class="preview-container skeleton"></div>
                 <div class="content-container pt-2 px-1">
