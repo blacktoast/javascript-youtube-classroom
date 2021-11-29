@@ -8,11 +8,11 @@ import { renderYoutubeClip } from "../view/renderSearchModal.js";
 
 const $searchYoutubeForm = $(".youtube-search-modal__form");
 const $searchButton = $(".youtube-search-modal__submit");
-const $skeleton = document.querySelector(
-  ".youtube-search-modal__skeleton-wrapper"
-);
 const $clips = document.querySelectorAll(".youtube-search-modal-clip");
-
+const $clipContainer = document.querySelector(".youtube-search-modal__clip");
+const lastClip = document.querySelector(
+  ".youtube-search-modal-clip:last-child"
+);
 function onEmpty() {}
 
 function getYoutubeVideoId(youtubeSearchData) {
@@ -40,13 +40,17 @@ export async function handlerSearchEvent() {
   renderLoading();
   let videoData;
   videoData = await search(makeSearchQuery(input, BASE_URL));
-  await renderYoutubeClip(videoData);
-  searchYoutubeForScrollDown();
+  renderYoutubeClip(videoData).then(
+    lastClip.addEventListener("load", (e) => {
+      console.log("object");
+    })
+  );
+
   endLoading();
 }
 
 function searchYoutubeForScrollDown() {
-  console.log($clips);
+  console.log($clips, $clipContainer);
   let options = {
     root: document.querySelector(".youtube-search-modal__inner"),
     rootMargin: "0px",
