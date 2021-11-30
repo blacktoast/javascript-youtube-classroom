@@ -6,28 +6,16 @@ import { makeQueryString } from "../utils/makeQuery.js";
 import { getMockYouTubeSearchData } from "../utils/tmpYouTubeData.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
 import { renderYoutubeClip } from "../view/renderSearchModal.js";
+import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
+import { initScrollEvents } from "./onModalScroll.js";
 
 const $searchYoutubeForm = $(".youtube-search-modal__form");
 const $searchButton = $(".youtube-search-modal__submit");
 
 function onEmpty() {}
 
-function getYoutubeVideoId(youtubeSearchData) {
-  let result = [...youtubeSearchData.items].map((e) => {
-    let videoInfo = {
-      videoId: e.id.videoId,
-      channelId: e.snippet.channelId,
-      title: e.snippet.title,
-    };
-    return videoInfo;
-  });
-  console.log(result);
-  return result;
-}
-
-function storeNextPageToken(input) {
-  console.log(input.nextPageToken);
-  localStorage.setItem(LOCAL_STORAGE_KEYS.NEXTPAGE_KEY, input.nextPageToken);
+function storeCurrentKeyword(input) {
+  localStorage.setItem(LOCAL_STORAGE_KEYS.CURRENT_KEYWORD, input);
 }
 
 async function mockSearch() {
@@ -52,9 +40,10 @@ export async function handlerSearchEvent() {
     )
   );
   //let videoData = await mockSearch();
-  console.log(videoData);
+  storeCurrentKeyword(input);
   storeNextPageToken(videoData);
   renderYoutubeClip(getYoutubeVideoId(videoData));
+
   endLoading();
 }
 

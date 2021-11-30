@@ -1,3 +1,4 @@
+import { initScrollEvents } from "../handler/onModalScroll.js";
 import { $ } from "../utils/dom.js";
 import { hideScroll, showScroll } from "../utils/setAtribute.js";
 
@@ -47,8 +48,18 @@ export function renderYoutubeClip(videoData) {
   });
 
   $youtubeClipWrapper.innerHTML = template;
+  initScrollEvents();
+
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
-export function renderClipByScrollDown() {}
+export function renderClipByScrollDown(videoData) {
+  let template = "";
+  videoData.map((item) => {
+    template += htmlYoutubeClip(item);
+  });
+
+  $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
+  initScrollEvents();
+}
 function renderEmptyResult() {}
