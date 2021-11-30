@@ -1,7 +1,7 @@
 import { initSearchEvent } from "./handler/searchYoutube.js";
 import { BASE_URL } from "./utils/constant.js";
 import { API_KEY } from "./utils/env.js";
-import { makeSearchQuery } from "./utils/makeQuery.js";
+import { makeQueryString } from "./utils/makeQuery.js";
 
 const $searchButton = document.querySelector("#search-button");
 const $modalClose = document.querySelector(".modal-close");
@@ -20,7 +20,7 @@ let query = {
 };
 $searchButton.addEventListener("click", onModalShow);
 $modalClose.addEventListener("click", onModalClose);
-let url = makeSearchQuery("하이", BASE_URL);
+let url = makeQueryString("하이", BASE_URL);
 
 function init() {
   initSearchEvent();

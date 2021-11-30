@@ -46,9 +46,9 @@ export function renderYoutubeClip(videoData) {
     template += htmlYoutubeClip(item);
   });
 
-  $youtubeClipWrapper.insertAdjacentHTML("afterbegin", template);
-  hideScroll($youtubeModalInner);
-  setTimeout(() => showScroll($youtubeModalInner), 1000);
+  $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
+  // hideScroll($youtubeModalInner);
+  //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
 
 function renderEmptyResult() {}
