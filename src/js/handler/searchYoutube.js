@@ -1,7 +1,8 @@
-import { BASE_URL } from "../utils/constant.js";
+import { BASE_URL, YOUTUBE, LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
+import { API_KEY } from "../utils/env.js";
+import { request } from "../utils/fetch.js";
 import { makeQueryString } from "../utils/makeQuery.js";
-import { hideElement, showElement } from "../utils/setAtribute.js";
 import { getMockYouTubeSearchData } from "../utils/tmpYouTubeData.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
 import { renderYoutubeClip } from "../view/renderSearchModal.js";
@@ -10,17 +11,11 @@ const $searchYoutubeForm = $(".youtube-search-modal__form");
 const $searchButton = $(".youtube-search-modal__submit");
 const $clipContainer = document.querySelector(".youtube-search-modal__clip");
 let nextPageToken = "";
-let videoData;
 
 function onEmpty() {}
 
 function getSearchInput() {
-  let input = $("[data-js=youtube-search-modal__input]").value;
   return input;
-}
-
-function setNextPageToken(input) {
-  nextPageToken = input;
 }
 
 function getYoutubeVideoId(youtubeSearchData) {
@@ -35,47 +30,35 @@ function getYoutubeVideoId(youtubeSearchData) {
   console.log(result);
   return result;
 }
-function storeNextPageToken(videoData) {
-  setNextPageToken(videoData.nextPageToken);
-  return;
+
+function storeNextPageToken(input) {
+  localStorage.setItem(LOCAL_STORAGE_KEYS.NEXTPAGE_KEY, input.nextPageToken);
 }
 
-async function search(query, nextPage = false) {
-  //const mockYoutubeSearchData = await getMockYouTubeSearchData();
-  //let result = getYoutubeVideoId(mockYoutubeSearchData);
-  const response = await fetch(query);
-  const videoData = await response.json();
-  const result = getYoutubeVideoId(videoData);
-  storeNextPageToken(videoData);
+async function mockSearch() {
+  const result = await getMockYouTubeSearchData();
+  console.log(result);
   return result;
 }
 
-function searchYoutubeForScrollDown(clips) {
-  let options = {
-    root: document.querySelector(".youtube-search-modal__inner"),
-    rootMargin: "0px",
-    threshold: 0.8,
-  };
-  let io = new IntersectionObserver(async (entries, observer) => {
-    if (entries[0].isIntersecting) {
-      alert("추가검색");
-      let input = getSearchInput();
-      console.log(input);
-      videoData = await search(makeQueryString(input, BASE_URL, nextPageToken));
-      renderYoutubeClip(videoData);
-    }
-  }, options);
-  return io;
-}
-
 export async function handlerSearchEvent() {
-  let input = getSearchInput();
+  let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
-  videoData = await search(makeQueryString(input, BASE_URL));
-
-  renderYoutubeClip(videoData);
-  const $clips = document.querySelectorAll(".youtube-search-modal-clip");
-  searchYoutubeForScrollDown($clips);
+  /* videoData = await request(
+    makeQueryString(
+      {
+        q: encodeURI(input),
+        type: "video",
+        maxResults: YOUTUBE.MAX_NUMBER,
+        key: API_KEY,
+      },
+      BASE_URL
+    )
+  );*/
+  let videoData = await mockSearch();
+  console.log(videoData);
+  storeNextPageToken(videoData);
+  renderYoutubeClip(getYoutubeVideoId(videoData));
   endLoading();
 }
 
@@ -86,6 +69,5 @@ export function initSearchEvent() {
   });
   $searchButton.addEventListener("click", (e) => {
     handlerSearchEvent();
-    console.log(e);
   });
 }

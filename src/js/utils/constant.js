@@ -6,3 +6,7 @@ export const MAX_SEARCH_NUMBER = 10;
 export const YOUTUBE = {
   MAX_NUMBER: 10,
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  NEXTPAGE_KEY: "nextPageToken",
+};
