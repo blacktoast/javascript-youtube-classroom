@@ -23,13 +23,13 @@ function getObserverForScrollEvents() {
       alert("추가검색");
       let input =
         localStorage.getItem(LOCAL_STORAGE_KEYS.CURRENT_KEYWORD) || "";
-      let nextPageToken =
+      let pageToken =
         localStorage.getItem(LOCAL_STORAGE_KEYS.NEXTPAGE_KEY) || "";
       const query = {
         q: encodeURI(input),
         type: "video",
         maxResults: YOUTUBE.MAX_NUMBER,
-        nextPageToken,
+        pageToken,
         key: API_KEY,
       };
 

@@ -8,6 +8,6 @@ export const YOUTUBE = {
 };
 
 export const LOCAL_STORAGE_KEYS = {
-  NEXTPAGE_KEY: "nextPageToken",
+  NEXTPAGE_KEY: "pageToken",
   CURRENT_KEYWORD: "currentKeyword",
 };
