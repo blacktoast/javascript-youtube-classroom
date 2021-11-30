@@ -9,14 +9,8 @@ import { renderYoutubeClip } from "../view/renderSearchModal.js";
 
 const $searchYoutubeForm = $(".youtube-search-modal__form");
 const $searchButton = $(".youtube-search-modal__submit");
-const $clipContainer = document.querySelector(".youtube-search-modal__clip");
-let nextPageToken = "";
 
 function onEmpty() {}
-
-function getSearchInput() {
-  return input;
-}
 
 function getYoutubeVideoId(youtubeSearchData) {
   let result = [...youtubeSearchData.items].map((e) => {
@@ -32,6 +26,7 @@ function getYoutubeVideoId(youtubeSearchData) {
 }
 
 function storeNextPageToken(input) {
+  console.log(input.nextPageToken);
   localStorage.setItem(LOCAL_STORAGE_KEYS.NEXTPAGE_KEY, input.nextPageToken);
 }
 
@@ -44,7 +39,8 @@ async function mockSearch() {
 export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
-  /* videoData = await request(
+  console.log(input);
+  let videoData = await request(
     makeQueryString(
       {
         q: encodeURI(input),
@@ -54,8 +50,8 @@ export async function handlerSearchEvent() {
       },
       BASE_URL
     )
-  );*/
-  let videoData = await mockSearch();
+  );
+  //let videoData = await mockSearch();
   console.log(videoData);
   storeNextPageToken(videoData);
   renderYoutubeClip(getYoutubeVideoId(videoData));
