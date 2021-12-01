@@ -1,3 +1,4 @@
+import { initClipStoreEvents } from "./handler/onModalSaveClip.js";
 import { initScrollEvents } from "./handler/onModalScroll.js";
 import { initSearchEvent } from "./handler/searchYoutube.js";
 import { API_KEY } from "./utils/env.js";
@@ -19,5 +20,6 @@ $modalClose.addEventListener("click", onModalClose);
 
 function init() {
   initSearchEvent();
+  initClipStoreEvents();
 }
 init();
