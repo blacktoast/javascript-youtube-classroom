@@ -5,6 +5,8 @@ import { makeQueryString } from "../utils/makeQuery.js";
 import { renderClipByScrollDown } from "../view/renderYoutubeClip.js";
 import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
 
+const observerForScrollEvents = getObserverForScrollEvents();
+
 function getIntersectionForInfinityScroll() {
   let clips = document.querySelectorAll(".youtube-search-modal-clip");
   return clips[clips.length - 1];
@@ -32,7 +34,6 @@ function getObserverForScrollEvents() {
         pageToken,
         key: API_KEY,
       };
-
       let videoData = await request(makeQueryString(query, BASE_URL));
       storeNextPageToken(videoData);
       renderClipByScrollDown(getYoutubeVideoId(videoData));
@@ -41,8 +42,8 @@ function getObserverForScrollEvents() {
   }, options);
   return io;
 }
+
 export function initScrollEvents() {
-  let observerForScrollEvents = getObserverForScrollEvents();
   let intersection = getIntersectionForInfinityScroll();
   console.log(intersection);
   observerForScrollEvents.observe(intersection);

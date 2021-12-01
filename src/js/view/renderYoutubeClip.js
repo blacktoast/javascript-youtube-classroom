@@ -5,6 +5,7 @@ import { hideElement, showElement } from "../utils/setAtribute.js";
 const $youtubeClipWrapper = $(".youtube-search-modal__clip");
 const $youtubeModalInner = $(".youtube-search-modal__inner");
 const $youtubeNotFound = $(".youtube-search-modal__not-found");
+const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
 function htmlYoutubeClip({ videoId, channelId, title }) {
   console.log(videoId, channelId, title);
@@ -43,14 +44,32 @@ function htmlYoutubeClip({ videoId, channelId, title }) {
 </article>`;
 }
 
-export function renderYoutubeClip(videoData) {
+function htmlRecentKeywords(keywords) {
+  let template = "";
+  console.log(keywords);
+  template = `<a class="chip">${keywords[keywords.length - 1]}</a>`;
+
+  return template;
+}
+
+function renderRecentKeywords(keywords) {
+  let template = htmlRecentKeywords(keywords);
+  if (keywords.length > 2) {
+    let firstKeywords = document.querySelectorAll(".chip");
+    firstKeywords = firstKeywords[firstKeywords.length - 1];
+    firstKeywords.remove();
+  }
+  $recentKeyword.insertAdjacentHTML("afterend", template);
+}
+
+export function renderYoutubeClip(videoData, keywords) {
   let template = "";
   videoData.map((item) => {
     template += htmlYoutubeClip(item);
   });
 
   $youtubeClipWrapper.innerHTML = template;
-  initScrollEvents();
+  renderRecentKeywords(keywords);
 
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);
@@ -60,7 +79,6 @@ export function renderClipByScrollDown(videoData) {
   videoData.map((item) => {
     template += htmlYoutubeClip(item);
   });
-
   $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
   initScrollEvents();
 }
