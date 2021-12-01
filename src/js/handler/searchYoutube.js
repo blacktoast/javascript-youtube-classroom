@@ -5,7 +5,10 @@ import { request } from "../utils/fetch.js";
 import { makeQueryString } from "../utils/makeQuery.js";
 import { getMockYouTubeSearchData } from "../utils/tmpYouTubeData.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
-import { renderYoutubeClip } from "../view/renderSearchModal.js";
+import {
+  renderNotfound,
+  renderYoutubeClip,
+} from "../view/renderYoutubeClip.js";
 import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
 import { initScrollEvents } from "./onModalScroll.js";
 
@@ -24,6 +27,8 @@ async function mockSearch() {
   return result;
 }
 
+
+
 export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
@@ -39,11 +44,14 @@ export async function handlerSearchEvent() {
       BASE_URL
     )
   );
+  console.log(videoData.items);
   //let videoData = await mockSearch();
-  storeCurrentKeyword(input);
-  storeNextPageToken(videoData);
-  renderYoutubeClip(getYoutubeVideoId(videoData));
-
+  if (videoData.items) renderNotfound();
+  else {
+    storeCurrentKeyword(input);
+    storeNextPageToken(videoData);
+    renderYoutubeClip(getYoutubeVideoId(videoData));
+  }
   endLoading();
 }
 

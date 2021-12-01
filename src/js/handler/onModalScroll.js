@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS, YOUTUBE, BASE_URL } from "../utils/constant.js";
 import { API_KEY } from "../utils/env.js";
 import { request } from "../utils/fetch.js";
 import { makeQueryString } from "../utils/makeQuery.js";
-import { renderClipByScrollDown } from "../view/renderSearchModal.js";
+import { renderClipByScrollDown } from "../view/renderYoutubeClip.js";
 import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
 
 function getIntersectionForInfinityScroll() {
