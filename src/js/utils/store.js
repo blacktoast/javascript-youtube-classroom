@@ -12,3 +12,4 @@ export function getRecentKeywords() {
   let keywords = JSON.parse(getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD));
   return keywords;
 }
+

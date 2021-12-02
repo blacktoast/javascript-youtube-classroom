@@ -8,13 +8,16 @@ export function storeNextPageToken(input) {
 export function getYoutubeClipInfo(youtubeSearchData) {
   let result = [...youtubeSearchData.items].map((e) => {
     let videoInfo = {
-      videoId: e.id.videoId,
+      clipId: e.id.videoId,
       channelId: e.snippet.channelId,
       title: e.snippet.title,
       channelName: e.snippet.channelTitle,
+      time: e.snippet.publishTime.slice(0, 10).split("-"),
     };
     return videoInfo;
   });
   console.log(result);
   return result;
 }
+
+export function storeTempClipInfo() {}

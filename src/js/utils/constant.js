@@ -12,4 +12,6 @@ export const LOCAL_STORAGE_KEYS = {
   NEXTPAGE_KEY: "pageToken",
   CURRENT_KEYWORD: "currentKeyword",
   RECENT_KEYWORD: "recentKeyword",
+  STORE_CLIP_ID: "clipID",
+  STORE_CLIP_INFO: "clipInfo",
 };

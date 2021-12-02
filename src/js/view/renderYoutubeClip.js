@@ -7,9 +7,11 @@ const $youtubeModalInner = $(".youtube-search-modal__inner");
 const $youtubeNotFound = $(".youtube-search-modal__not-found");
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
-function htmlYoutubeClip({ videoId, channelId, title, channelName }) {
-  console.log(videoId, channelId, title);
-  return `<article class="clip youtube-search-modal-clip">
+function htmlYoutubeClip(
+  { clipId, channelId, title, channelName, time },
+  index
+) {
+  return `<article class="clip youtube-search-modal-clip" data-clip-id="${index}">
   <div
     class="preview-container"
     data-js="youtube-search-modal-clip__preview"
@@ -17,7 +19,7 @@ function htmlYoutubeClip({ videoId, channelId, title, channelName }) {
     <iframe
       width="100%"
       height="118"
-      src="https://www.youtube-nocookie.com/embed/${videoId}"
+      src="https://www.youtube-nocookie.com/embed/${clipId}"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
@@ -34,10 +36,10 @@ function htmlYoutubeClip({ videoId, channelId, title, channelName }) {
         ${channelName}
       </a>
       <div class="meta">
-        <p>2021년 3월 2일</p>
+        <p>${time[0]}년 ${time[1]}월 ${time[2]}일</p>
       </div>
       <div class="d-flex justify-end">
-        <button class="btn">⬇️ 저장</button>
+        <button class="btn store-btn">⬇️ 저장</button>
       </div>
     </div>
   </div>
@@ -63,8 +65,8 @@ function renderRecentKeywords(keywords) {
 
 export function renderYoutubeClip(videoData, keywords) {
   let template = "";
-  videoData.map((item) => {
-    template += htmlYoutubeClip(item);
+  videoData.map((item, i) => {
+    template += htmlYoutubeClip(item, i);
   });
 
   $youtubeClipWrapper.innerHTML = template;

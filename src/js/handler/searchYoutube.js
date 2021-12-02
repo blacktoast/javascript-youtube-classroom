@@ -42,7 +42,7 @@ export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
   console.log(input);
-  let videoData = await request(
+  /*let videoData = await request(
     makeQueryString(
       {
         q: encodeURI(input),
@@ -52,8 +52,8 @@ export async function handlerSearchEvent() {
       },
       BASE_URL
     )
-  );
-  //let videoData = await mockSearch();
+  ); */
+  let videoData = await mockSearch();
   console.log(videoData);
   if (videoData.items === []) renderNotfound();
   else {
