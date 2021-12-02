@@ -6,6 +6,7 @@ const $youtubeClipWrapper = $(".youtube-search-modal__clip");
 const $youtubeModalInner = $(".youtube-search-modal__inner");
 const $youtubeNotFound = $(".youtube-search-modal__not-found");
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
+const $storedClipNumber = $(".youtube-search-modal__storeVideoNumber");
 
 function htmlYoutubeClip(
   { clipId, channelId, title, channelName, time, overlapping },
@@ -78,9 +79,13 @@ export function renderYoutubeClip(videoData, keywords) {
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
+export function renderStoredClipNumber(num) {
+  $storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString()} 개`;
+}
+
 export function renderClipByScrollDown(videoData) {
   let template = "";
-  videoData.map((item) => {
+  videoData.map((item, i) => {
     template += htmlYoutubeClip(item, i);
   });
   $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);

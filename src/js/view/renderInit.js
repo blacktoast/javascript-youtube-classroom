@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
 import { getItem, getRecentKeywords } from "../utils/store.js";
+import { renderStoredClipNumber } from "./renderYoutubeClip.js";
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
 function htmlRecentKeywords(key) {
@@ -24,4 +25,5 @@ function initRenderModal() {}
 
 export function renderInit() {
   initRenderRecentKeywords();
+  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length);
 }

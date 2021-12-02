@@ -1,5 +1,8 @@
 import { BASE_URL, YOUTUBE, LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
+import { API_KEY } from "../utils/env.js";
+import { request } from "../utils/fetch.js";
+import { makeQueryString } from "../utils/makeQuery.js";
 import { getItem, getRecentKeywords, setItem } from "../utils/store.js";
 import { getMockYouTubeSearchData } from "../utils/tmpYouTubeData.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
@@ -57,7 +60,7 @@ export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
   console.log(input);
-  /*let videoData = await request(
+  let videoData = await request(
     makeQueryString(
       {
         q: encodeURI(input),
@@ -67,8 +70,8 @@ export async function handlerSearchEvent() {
       },
       BASE_URL
     )
-  ); */
-  let videoData = await mockSearch();
+  );
+  //let videoData = await mockSearch();
   console.log(videoData);
   if (videoData.items === []) renderNotfound();
   else {

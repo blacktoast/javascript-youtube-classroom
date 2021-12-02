@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
 import { getItem, setItem } from "../utils/store.js";
+import { renderStoredClipNumber } from "../view/renderYoutubeClip.js";
 
 const $youtubeClipWrapper = $(".youtube-search-modal__clip");
 
@@ -33,6 +34,7 @@ function handlerStoreEvents(target) {
   console.log(clipInfo);
   storeClipInfo(clipInfo.clipId, clipInfo);
   target.classList.add("d-none");
+  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length);
 }
 export function initClipStoreEvents() {
   $youtubeClipWrapper.addEventListener("click", (e) => {
