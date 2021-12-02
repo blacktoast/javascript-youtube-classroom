@@ -31,15 +31,20 @@ function storeCurrentKeyword(input) {
 
 function isOverlappingToClip(clipInfo) {
   let storedClipId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID) || null;
+  let tmp = clipInfo;
   if (storedClipId) {
     clipInfo.forEach((clip) => {
       storedClipId.forEach((stored) => {
-        clip === stored
-          ? (clip.overlapping = true)
-          : (clip.overlapping = false);
+        console.log(clip.clipId === stored);
+        if (!clip.overlapping) {
+          clip.clipId === stored
+            ? (clip.overlapping = true)
+            : (clip.overlapping = false);
+        }
       });
     });
   }
+  return clipInfo;
 }
 
 async function mockSearch() {
@@ -70,10 +75,9 @@ export async function handlerSearchEvent() {
     storeCurrentKeyword(input);
     storeNextPageToken(videoData);
     storeRecentKeywords(input);
-    renderYoutubeClip(
-      getYoutubeClipInfo(videoData),
-      getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD)
-    );
+    videoData = getYoutubeClipInfo(videoData);
+    isOverlappingToClip(videoData);
+    renderYoutubeClip(videoData, getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD));
     initScrollEvents();
   }
   endLoading();

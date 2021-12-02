@@ -67,6 +67,7 @@ function renderRecentKeywords(keywords) {
 
 export function renderYoutubeClip(videoData, keywords) {
   let template = "";
+  console.log(videoData);
   videoData.map((item, i) => {
     template += htmlYoutubeClip(item, i);
   });
