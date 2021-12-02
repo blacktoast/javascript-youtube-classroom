@@ -7,7 +7,7 @@ const $youtubeModalInner = $(".youtube-search-modal__inner");
 const $youtubeNotFound = $(".youtube-search-modal__not-found");
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
-function htmlYoutubeClip({ videoId, channelId, title }) {
+function htmlYoutubeClip({ videoId, channelId, title, channelName }) {
   console.log(videoId, channelId, title);
   return `<article class="clip youtube-search-modal-clip">
   <div
@@ -31,7 +31,7 @@ function htmlYoutubeClip({ videoId, channelId, title }) {
         target="_blank"
         class="channel-name mt-1"
       >
-        메이커준
+        ${channelName}
       </a>
       <div class="meta">
         <p>2021년 3월 2일</p>

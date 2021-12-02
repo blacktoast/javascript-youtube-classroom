@@ -11,6 +11,7 @@ export function getYoutubeClipInfo(youtubeSearchData) {
       videoId: e.id.videoId,
       channelId: e.snippet.channelId,
       title: e.snippet.title,
+      channelName: e.snippet.channelTitle,
     };
     return videoInfo;
   });
