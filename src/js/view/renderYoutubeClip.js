@@ -48,7 +48,6 @@ function htmlRecentKeywords(keywords) {
   let template = "";
   console.log(keywords);
   template = `<a class="chip">${keywords[keywords.length - 1]}</a>`;
-
   return template;
 }
 
