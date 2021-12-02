@@ -5,7 +5,7 @@ export function storeNextPageToken(input) {
   localStorage.setItem(LOCAL_STORAGE_KEYS.NEXTPAGE_KEY, input.nextPageToken);
 }
 
-export function getYoutubeVideoId(youtubeSearchData) {
+export function getYoutubeClipInfo(youtubeSearchData) {
   let result = [...youtubeSearchData.items].map((e) => {
     let videoInfo = {
       videoId: e.id.videoId,

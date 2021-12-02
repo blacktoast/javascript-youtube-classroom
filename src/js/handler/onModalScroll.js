@@ -3,7 +3,7 @@ import { API_KEY } from "../utils/env.js";
 import { request } from "../utils/fetch.js";
 import { makeQueryString } from "../utils/makeQuery.js";
 import { renderClipByScrollDown } from "../view/renderYoutubeClip.js";
-import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
+import { getYoutubeClipInfo, storeNextPageToken } from "./onModalCommon.js";
 
 const observerForScrollEvents = getObserverForScrollEvents();
 
@@ -36,7 +36,7 @@ function getObserverForScrollEvents() {
       };
       let videoData = await request(makeQueryString(query, BASE_URL));
       storeNextPageToken(videoData);
-      renderClipByScrollDown(getYoutubeVideoId(videoData));
+      renderClipByScrollDown(getYoutubeClipInfo(videoData));
       observer.unobserve(entries[0].target);
     }
   }, options);

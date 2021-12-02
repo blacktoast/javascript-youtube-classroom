@@ -10,7 +10,7 @@ import {
   renderNotfound,
   renderYoutubeClip,
 } from "../view/renderYoutubeClip.js";
-import { getYoutubeVideoId, storeNextPageToken } from "./onModalCommon.js";
+import { getYoutubeClipInfo, storeNextPageToken } from "./onModalCommon.js";
 import { initScrollEvents } from "./onModalScroll.js";
 
 //r검색결과가 10개미만일때,
@@ -42,7 +42,7 @@ export async function handlerSearchEvent() {
   let input = $("[data-js=youtube-search-modal__input]").value;
   renderLoading();
   console.log(input);
-  /*  let videoData = await request(
+  let videoData = await request(
     makeQueryString(
       {
         q: encodeURI(input),
@@ -53,14 +53,14 @@ export async function handlerSearchEvent() {
       BASE_URL
     )
   );
- */
-  let videoData = await mockSearch();
+  //let videoData = await mockSearch();
+  console.log(videoData);
   if (videoData.items === []) renderNotfound();
   else {
     storeCurrentKeyword(input);
     storeNextPageToken(videoData);
     storeRecentKeywords(input);
-    renderYoutubeClip(getYoutubeVideoId(videoData), getRecentKeywords());
+    renderYoutubeClip(getYoutubeClipInfo(videoData), getRecentKeywords());
     initScrollEvents();
   }
   endLoading();
