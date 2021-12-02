@@ -1,4 +1,6 @@
+import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
+import { getItem, setItem } from "../utils/store.js";
 
 const $youtubeClipWrapper = $(".youtube-search-modal__clip");
 
@@ -15,9 +17,21 @@ function manufactureForStoreClip(target) {
   return clipInfo;
 }
 
+function storeClipInfo(clipId, clipInfo) {
+  let storedClipId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID) || [];
+  let storedClipInfo = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO) || [];
+  console.log(storedClipInfo);
+  storedClipInfo.push(clipInfo);
+  storedClipId.push(clipId);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedClipId);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClipInfo);
+  return;
+}
+
 function handlerStoreEvents(target) {
   let clipInfo = manufactureForStoreClip(target);
   console.log(clipInfo);
+  storeClipInfo(clipInfo.clipId, clipInfo);
   target.classList.add("d-none");
 }
 export function initClipStoreEvents() {

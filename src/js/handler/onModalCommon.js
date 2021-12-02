@@ -13,6 +13,7 @@ export function getYoutubeClipInfo(youtubeSearchData) {
       title: e.snippet.title,
       channelName: e.snippet.channelTitle,
       time: e.snippet.publishTime.slice(0, 10).split("-"),
+      overlapping: false,
     };
     return videoInfo;
   });

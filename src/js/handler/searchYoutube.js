@@ -1,8 +1,5 @@
 import { BASE_URL, YOUTUBE, LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
-import { API_KEY } from "../utils/env.js";
-import { request } from "../utils/fetch.js";
-import { makeQueryString } from "../utils/makeQuery.js";
 import { getItem, getRecentKeywords, setItem } from "../utils/store.js";
 import { getMockYouTubeSearchData } from "../utils/tmpYouTubeData.js";
 import { endLoading, renderLoading } from "../view/renderModalCommon.js";
@@ -20,7 +17,7 @@ const $searchButton = $(".youtube-search-modal__submit");
 function onEmpty() {}
 
 function storeRecentKeywords(input) {
-  let storedKeywords = getRecentKeywords() || [];
+  let storedKeywords = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD) || [];
   if (storedKeywords.length > 2) {
     storedKeywords.splice(0, 1);
   }
@@ -30,6 +27,19 @@ function storeRecentKeywords(input) {
 
 function storeCurrentKeyword(input) {
   localStorage.setItem(LOCAL_STORAGE_KEYS.CURRENT_KEYWORD, input);
+}
+
+function isOverlappingToClip(clipInfo) {
+  let storedClipId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID) || null;
+  if (storedClipId) {
+    clipInfo.forEach((clip) => {
+      storedClipId.forEach((stored) => {
+        clip === stored
+          ? (clip.overlapping = true)
+          : (clip.overlapping = false);
+      });
+    });
+  }
 }
 
 async function mockSearch() {
@@ -60,7 +70,10 @@ export async function handlerSearchEvent() {
     storeCurrentKeyword(input);
     storeNextPageToken(videoData);
     storeRecentKeywords(input);
-    renderYoutubeClip(getYoutubeClipInfo(videoData), getRecentKeywords());
+    renderYoutubeClip(
+      getYoutubeClipInfo(videoData),
+      getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD)
+    );
     initScrollEvents();
   }
   endLoading();

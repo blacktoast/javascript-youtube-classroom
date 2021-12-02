@@ -1,5 +1,6 @@
+import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
-import { getRecentKeywords } from "../utils/store.js";
+import { getItem, getRecentKeywords } from "../utils/store.js";
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
 function htmlRecentKeywords(key) {
@@ -13,7 +14,7 @@ function htmlRecentKeywords(key) {
 }
 
 function initRenderRecentKeywords() {
-  let keys = getRecentKeywords();
+  let keys = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD);
   let template = htmlRecentKeywords(keys);
   console.log(template);
   $recentKeyword.insertAdjacentHTML("afterend", template);

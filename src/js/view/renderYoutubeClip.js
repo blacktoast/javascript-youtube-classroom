@@ -8,7 +8,7 @@ const $youtubeNotFound = $(".youtube-search-modal__not-found");
 const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
 function htmlYoutubeClip(
-  { clipId, channelId, title, channelName, time },
+  { clipId, channelId, title, channelName, time, overlapping },
   index
 ) {
   return `<article class="clip youtube-search-modal-clip" data-clip-id="${index}">
@@ -39,7 +39,9 @@ function htmlYoutubeClip(
         <p>${time[0]}년 ${time[1]}월 ${time[2]}일</p>
       </div>
       <div class="d-flex justify-end">
-        <button class="btn store-btn">⬇️ 저장</button>
+        <button class="btn store-btn ${
+          overlapping ? "d-none" : ""
+        }">⬇️ 저장</button>
       </div>
     </div>
   </div>
@@ -78,7 +80,7 @@ export function renderYoutubeClip(videoData, keywords) {
 export function renderClipByScrollDown(videoData) {
   let template = "";
   videoData.map((item) => {
-    template += htmlYoutubeClip(item);
+    template += htmlYoutubeClip(item, i);
   });
   $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
   initScrollEvents();
