@@ -91,6 +91,10 @@ export function renderClipByScrollDown(videoData) {
   $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
   initScrollEvents();
 }
+
+export function renderOnMainSavedClip(savedClips) {
+  
+}
 export function renderNotfound() {
   hideElement($youtubeClipWrapper);
   showElement($youtubeNotFound);
