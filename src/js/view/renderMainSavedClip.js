@@ -34,10 +34,10 @@ function htmlSavedYoutubeClip(
         <p>${time[0]}년 ${time[1]}월 ${time[2]}일</p>
       </div>
       <div>
-                      <span class="opacity-hover">✅</span>
+                      <span class="opacity-hover emojis" data-emoji-type="watch">✅</span>
                       <span class="opacity-hover">👍</span>
                       <span class="opacity-hover">💬</span>
-                      <span class="opacity-hover">🗑️</span>
+                      <span class="opacity-hove emojis" data-emoji-type="delete">🗑️</span>
         </div>
     </div>
   </div>

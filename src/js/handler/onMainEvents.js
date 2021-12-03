@@ -2,6 +2,7 @@ import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { hideScroll, showScroll } from "../utils/setAtribute.js";
 import { getItem } from "../utils/store.js";
 import { renderYoutubeClipToMain } from "../view/renderMainSavedClip.js";
+import { initEmojisEvents } from "./onMainWactchedClip.js";
 
 const $body = document.querySelector("body");
 const $searchButton = document.querySelector("#search-button");
@@ -27,4 +28,5 @@ function forRenderSavedClipOnMain() {
 export function initEvents() {
   $searchButton.addEventListener("click", onModalShow);
   $modalClose.addEventListener("click", onModalClose);
+  initEmojisEvents();
 }
