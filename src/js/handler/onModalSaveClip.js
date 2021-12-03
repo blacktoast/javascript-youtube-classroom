@@ -29,7 +29,16 @@ function storeClipInfo(clipId, clipInfo) {
   return;
 }
 
+function isMaxSavedClip() {
+  if (getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length > 99) return true;
+  return false;
+}
+
 function handlerStoreEvents(target) {
+  if (isMaxSavedClip()) {
+    alert("100개 이상은 저장할 수 업습니다");
+    return;
+  }
   let clipInfo = manufactureForStoreClip(target);
   console.log(clipInfo);
   storeClipInfo(clipInfo.clipId, clipInfo);
