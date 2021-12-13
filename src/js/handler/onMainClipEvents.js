@@ -22,7 +22,6 @@ function handleDeleteSavedClip(target) {
 	handleRerenderStoreBtn(clipId);
 }
 
-//
 function handleRerenderStoreBtn(target) {
 	let $OnMadalClips = document.querySelectorAll('.youtube-search-modal-clip');
 	let onModalClips = [];
