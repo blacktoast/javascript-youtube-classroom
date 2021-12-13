@@ -1,5 +1,6 @@
 import { LOCAL_STORAGE_KEYS } from '../utils/constant.js';
 import { $ } from '../utils/dom.js';
+import { hideElement, showElement } from '../utils/setAtribute.js';
 import { getItem, setItem } from '../utils/store.js';
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제
@@ -9,22 +10,31 @@ import { getItem, setItem } from '../utils/store.js';
 const $savedClipWrapper = $('.main-savedClip-wrapper');
 
 function handleDeleteSavedClip(target) {
-	let clipId = target.closest('.main-youtube-savedClip');
-	let clipNumber = clipId.dataset.clipId;
+	let clip = target.closest('.main-youtube-savedClip');
+	let clipNumber = clip.dataset.clipId;
 	let storedId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID);
 	let storedClips = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO);
+	let clipId = storedId[clipNumber];
 	storedId.splice(clipNumber, 1);
 	storedClips.splice(clipNumber, 1);
 	setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
 	setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
-	
+	handleRerenderStoreBtn(clipId);
 }
 
 //
 function handleRerenderStoreBtn(target) {
 	let $OnMadalClips = document.querySelectorAll('.youtube-search-modal-clip');
+	let onModalClips = [];
 	[ ...$OnMadalClips ].map(e => {
-		console.log(e.querySelector('.preview-container>iframe').src);
+		let t = e.dataset.clipId;
+		onModalClips.push(t);
+	});
+	onModalClips.map(clip => {
+		if (clip === target) {
+			let targetClip = document.querySelector(`[data-clip-id="${clip}"]`);
+			showElement(targetClip.querySelector('.store-btn'));
+		}
 	});
 }
 
