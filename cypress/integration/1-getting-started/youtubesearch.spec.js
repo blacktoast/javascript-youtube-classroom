@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { YOUTUBE } from "../../../src/js/utils/constant.js";
+import { server_ip } from "../../../src/js/utils/env.js";
 
 // Welcome to Cypress!
 //
@@ -15,7 +16,7 @@ import { YOUTUBE } from "../../../src/js/utils/constant.js";
 
 describe("유튜브 검색 테스트", () => {
   beforeEach(() => {
-    cy.visit("141.164.56.2:5500");
+    cy.visit(server_ip);
     cy.get("#search-button").click();
   });
 

@@ -14,6 +14,7 @@ const onModalShow = () => {
 	hideScroll($body);
 };
 
+
 const onModalClose = () => {
 	forRenderSavedClipOnMain();
 	$modal.classList.remove('open');
