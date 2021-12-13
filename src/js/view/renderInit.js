@@ -6,7 +6,6 @@ const $recentKeyword = $(".youtube-search-modal__recentKewords");
 
 function htmlRecentKeywords(key) {
   let template = "";
-  console.log(key);
   key.forEach((e) => {
     template += `<a class="chip">${e}</a>`;
   });
@@ -15,7 +14,8 @@ function htmlRecentKeywords(key) {
 }
 
 function initRenderRecentKeywords() {
-  let keys = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD);
+  let keys = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD) || [];
+  console.log(keys);
   let template = htmlRecentKeywords(keys);
   console.log(template);
   $recentKeyword.insertAdjacentHTML("afterend", template);
@@ -25,5 +25,5 @@ function initRenderModal() {}
 
 export function renderInit() {
   initRenderRecentKeywords();
-  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length);
+  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length || "");
 }
