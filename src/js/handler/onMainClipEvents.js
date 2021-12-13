@@ -2,8 +2,20 @@ import { $ } from "../utils/dom.js";
 
 const $savedClipWrapper = $(".main-savedClip-wrapper");
 
+function handleDeleteSavedClip(target){
+  console.log(target)
+
+}
+
 function handleEmojiEvent(target) {
-  console.log(target);
+ switch (target.dataset.emojiType){
+   case "delete":
+     handleDeleteSavedClip(target)
+     break;
+     case "watch":
+     handleWatchedClip(target)
+    break;
+ }
 }
 
 export function initEmojisEvents() {
