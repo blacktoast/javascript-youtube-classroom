@@ -1,13 +1,10 @@
-import { $ } from "../utils/dom.js";
+import { $ } from '../utils/dom.js';
 
-const $savedClipWrapper = $(".main-savedClip-wrapper");
+const $savedClipWrapper = $('.main-savedClip-wrapper');
 
-function htmlSavedYoutubeClip(
-  { clipId, channelId, title, channelName, time },
-  index
-) {
-  console.log(time)
-  return `<article class="clip main-youtube-savedClip" data-clip-id="${index}">
+function htmlSavedYoutubeClip({ clipId, channelId, title, channelName, time }, index) {
+	console.log(time);
+	return `<article class="clip main-youtube-savedClip" data-clip-id="${index}">
   <div
     class="preview-container"
     data-js="youtube-main-savedClip__preview"
@@ -45,15 +42,18 @@ function htmlSavedYoutubeClip(
 </article>`;
 }
 
-export function renderYoutubeClipToMain(videoData, keywords) {
-  let template = "";
-  console.log(videoData);
-  videoData.map((item, i) => {
-    template += htmlSavedYoutubeClip(item, i);
-  });
+export function renderSavedClipToMain(videoData, keywords) {
+	let template = '';
+	if (videoData.length > 0) {
+		console.log(videoData);
+		videoData.map((item, i) => {
+			template += htmlSavedYoutubeClip(item, i);
+		});
 
-  $savedClipWrapper.innerHTML = template;
-
-  // hideScroll($youtubeModalInner);
-  //setTimeout(() => showScroll($youtubeModalInner), 1000);
+		$savedClipWrapper.innerHTML = template;
+	} else {
+		alert('hji');
+	}
+	// hideScroll($youtubeModalInner);
+	//setTimeout(() => showScroll($youtubeModalInner), 1000);
 }

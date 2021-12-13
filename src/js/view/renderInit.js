@@ -1,29 +1,31 @@
-import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
-import { $ } from "../utils/dom.js";
-import { getItem, getRecentKeywords } from "../utils/store.js";
-import { renderStoredClipNumber } from "./renderYoutubeClip.js";
-const $recentKeyword = $(".youtube-search-modal__recentKewords");
+import { LOCAL_STORAGE_KEYS } from '../utils/constant.js';
+import { $ } from '../utils/dom.js';
+import { getItem, getRecentKeywords } from '../utils/store.js';
+import { renderSavedClipToMain } from './renderMainSavedClip.js';
+import { renderStoredClipNumber } from './renderYoutubeClip.js';
+const $recentKeyword = $('.youtube-search-modal__recentKewords');
 
 function htmlRecentKeywords(key) {
-  let template = "";
-  key.forEach((e) => {
-    template += `<a class="chip">${e}</a>`;
-  });
-  console.log(template);
-  return template;
+	let template = '';
+	key.forEach(e => {
+		template += `<a class="chip">${e}</a>`;
+	});
+	console.log(template);
+	return template;
 }
 
 function initRenderRecentKeywords() {
-  let keys = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD) || [];
-  console.log(keys);
-  let template = htmlRecentKeywords(keys);
-  console.log(template);
-  $recentKeyword.insertAdjacentHTML("afterend", template);
+	let keys = getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD) || [];
+	console.log(keys);
+	let template = htmlRecentKeywords(keys);
+	console.log(template);
+	$recentKeyword.insertAdjacentHTML('afterend', template);
 }
 
 function initRenderModal() {}
 
 export function renderInit() {
-  initRenderRecentKeywords();
-  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length || "");
+	initRenderRecentKeywords();
+	renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length || '');
+	renderSavedClipToMain(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO) || '');
 }
