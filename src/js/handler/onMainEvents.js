@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { hideScroll, showScroll } from "../utils/setAtribute.js";
 import { getItem } from "../utils/store.js";
 import { renderYoutubeClipToMain } from "../view/renderMainSavedClip.js";
-import { initEmojisEvents } from "./onMainWactchedClip.js";
+import { initEmojisEvents } from "./onMainClipEvents.js";
 
 const $body = document.querySelector("body");
 const $searchButton = document.querySelector("#search-button");
