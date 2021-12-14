@@ -75,7 +75,7 @@ export function renderYoutubeClip(videoData, keywords) {
 	//setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
 export function renderStoredClipNumber(num) {
-	$storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString()} 개`;
+	$storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString() || 0} 개`;
 }
 
 export function renderClipByScrollDown(videoData) {

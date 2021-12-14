@@ -2,6 +2,7 @@ import { LOCAL_STORAGE_KEYS } from '../utils/constant.js';
 import { $ } from '../utils/dom.js';
 import { hideElement, showElement } from '../utils/setAtribute.js';
 import { getItem, setItem } from '../utils/store.js';
+import { renderSavedClipToMain } from '../view/renderMainSavedClip.js';
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제
  * [] 체크 이모지 눌렀을때 본 클립으로 이동?
@@ -19,6 +20,8 @@ function handleDeleteSavedClip(target) {
 	storedClips.splice(clipNumber, 1);
 	setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
 	setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
+	console.log(storedClips);
+	renderSavedClipToMain(storedClips);
 	handleRerenderStoreBtn(clipId);
 }
 
@@ -40,7 +43,9 @@ function handleRerenderStoreBtn(target) {
 function handleEmojiEvent(target) {
 	switch (target.dataset.emojiType) {
 		case 'delete':
-			handleDeleteSavedClip(target);
+			if(confirm("저장된 클립을 삭제하기겠습니까?")){
+				handleDeleteSavedClip(target);
+			}
 			break;
 		case 'watch':
 			handleWatchedClip(target);
