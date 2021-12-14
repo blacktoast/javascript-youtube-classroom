@@ -36,6 +36,7 @@ describe("유튜브 검색 테스트", () => {
     typeSearchKeywordAndClickToSubmitButton("우테코");
     cy.get('[data-js="youtube-search-modal__clip"]').should(
       "have.length",
+      
       YOUTUBE.NUMBER_TO_LOAD
     );
   });
