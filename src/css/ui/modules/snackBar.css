@@ -1,12 +1,13 @@
 .snackBar {
   opacity: 0;
   display: flex;
+ 
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   z-index: 2;
 }
 
@@ -18,13 +19,17 @@
   opacity: 0;
 }
 .snack-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: top 0.25s ease;
   top: 40vh;
-  width: 10vw;
+  width: 15rem;
   height: 5vh;
   margin: auto;
   overflow: none;
-  background: red;
+  color: antiquewhite;
+  background: rgb(58, 56, 56);
   text-align: center;
   border-radius: 5px;
   position: relative;

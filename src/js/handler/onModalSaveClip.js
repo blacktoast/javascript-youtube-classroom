@@ -40,7 +40,7 @@ function handlerStoreEvents(target) {
     alert("100개 이상은 저장할 수 업습니다");
     return;
   }
-  renderSnackbar();
+  renderSnackbar("store");
   let clipInfo = manufactureForStoreClip(target);
   console.log(clipInfo);
   storeClipInfo(clipInfo.clipId, clipInfo);

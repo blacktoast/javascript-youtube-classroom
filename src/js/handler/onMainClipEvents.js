@@ -3,6 +3,7 @@ import { $ } from '../utils/dom.js';
 import { hideElement, showElement } from '../utils/setAtribute.js';
 import { getItem, setItem } from '../utils/store.js';
 import { renderSavedClipToMain } from '../view/renderMainSavedClip.js';
+import { renderSnackbar } from '../view/renderSnackBar.js';
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제
  * [] 체크 이모지 눌렀을때 본 클립으로 이동?
@@ -45,6 +46,7 @@ function handleEmojiEvent(target) {
 		case 'delete':
 			if(confirm("저장된 클립을 삭제하기겠습니까?")){
 				handleDeleteSavedClip(target);
+				renderSnackbar("remove");
 			}
 			break;
 		case 'watch':
