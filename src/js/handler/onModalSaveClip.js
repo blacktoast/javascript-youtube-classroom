@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
 import { getItem, setItem } from "../utils/store.js";
+import { renderSnackbar } from "../view/renderSnackBar.js";
 import { renderStoredClipNumber } from "../view/renderYoutubeClip.js";
 
 const $youtubeClipWrapper = $(".youtube-search-modal__clip");
@@ -39,6 +40,7 @@ function handlerStoreEvents(target) {
     alert("100개 이상은 저장할 수 업습니다");
     return;
   }
+  renderSnackbar();
   let clipInfo = manufactureForStoreClip(target);
   console.log(clipInfo);
   storeClipInfo(clipInfo.clipId, clipInfo);

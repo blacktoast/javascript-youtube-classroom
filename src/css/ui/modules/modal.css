@@ -17,6 +17,7 @@
   visibility: visible;
 }
 
+
 .modal-inner {
   transition: top 0.25s ease;
   width: 960px;
@@ -58,4 +59,3 @@ svg {
     box-sizing: border-box;
   }
 }
-
