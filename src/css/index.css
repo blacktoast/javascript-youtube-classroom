@@ -25,6 +25,10 @@ a {
   opacity: 1;
 }
 
+.youtube-search-modal__skeleton-wrapper{
+  z-index: 5;
+}
+
 .scroll-none {
   overflow: hidden;
 }
