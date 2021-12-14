@@ -79,7 +79,7 @@ export async function handlerSearchEvent() {
 		renderYoutubeClip(videoData, getItem(LOCAL_STORAGE_KEYS.RECENT_KEYWORD));
 		initScrollEvents();
 	}
-	//endLoading();
+	endLoading();
 }
 
 export function initSearchEvent() {
