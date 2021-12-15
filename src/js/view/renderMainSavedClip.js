@@ -9,7 +9,7 @@ function htmlSavedYoutubeClip(
   index
 ) {
   console.log(time);
-  return `<article class="clip main-youtube-savedClip" data-clip-id="${index}">
+  return `<article class="clip main-youtube-clip" data-clip-id="${index}">
   <div
     class="preview-container"
     data-js="youtube-main-savedClip__preview"
@@ -47,15 +47,14 @@ function htmlSavedYoutubeClip(
 </article>`;
 }
 
-export function renderSavedClipToMain(videoData, keywords) {
+export function renderClipToMain(videoData,wrapper) {
   let template = "";
-  
     console.log(videoData);
     videoData.map((item, i) => {
       template += htmlSavedYoutubeClip(item, i);
     });
     hideElement($savedClipNotfound);
-    $savedClipWrapper.innerHTML = template;
+    wrapper.innerHTML = template;
   if(videoData.length===0) {
     showElement($savedClipNotfound);
     
@@ -63,3 +62,4 @@ export function renderSavedClipToMain(videoData, keywords) {
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
+

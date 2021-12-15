@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
 import { hideElement, showElement } from "../utils/setAtribute.js";
 import { getItem, setItem } from "../utils/store.js";
-import { renderSavedClipToMain } from "../view/renderMainSavedClip.js";
+import { renderClipToMain } from "../view/renderMainSavedClip.js";
 import { renderSnackbar } from "../view/renderSnackBar.js";
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제
@@ -12,7 +12,7 @@ import { renderSnackbar } from "../view/renderSnackBar.js";
 const $savedClipWrapper = $(".main-savedClip-wrapper");
 
 function handleDeleteSavedClip(target) {
-  let clip = target.closest(".main-youtube-savedClip");
+  let clip = target.closest(".main-youtube-clip");
   let clipNumber = clip.dataset.clipId;
   let storedId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID);
   let storedClips = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO);
@@ -22,7 +22,7 @@ function handleDeleteSavedClip(target) {
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
   console.log(storedClips);
-  renderSavedClipToMain(storedClips);
+  renderClipToMain(storedClips);
   handleRerenderStoreBtn(clipId);
 }
 
