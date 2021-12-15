@@ -4,15 +4,23 @@ import { hideElement, showElement } from "../utils/setAtribute.js";
 const $saveSnackBar = $(".snackBar-saveClip");
 const $removeSnackBar = $(".snackBar__remove__saveClip");
 const snackbars = [$saveSnackBar, $removeSnackBar];
-const onSnackbarShow = (i) => {
-  console.log(snackbars[i]);
+
+let id2;
+let id = "";
+
+const showSnackbar = (i) => {
   showElement(snackbars[i]);
-  setTimeout(() => snackbars[i].classList.add("open"), 10);
+  id2 = setTimeout(() => snackbars[i].classList.add("open"), 10);
 };
-const onSnackbarHide = (i) => {
+const hideSnackBar = (i) => {
+  if (id2) {
+    console.log(id2);
+    clearTimeout(id2);
+  }
   snackbars[i].classList.remove("open");
-  setTimeout(() => hideElement(snackbars[i]), 800);
+  id2 = setTimeout(() => hideElement(snackbars[i]), 800);
 };
+
 function htmlSnackbar(string) {
   return ` <div class="snackBar">
     <div class="snack-inner">
@@ -22,15 +30,21 @@ function htmlSnackbar(string) {
 }
 
 export function renderSnackbar(str) {
-  console.log(str);
   switch (str) {
     case "store":
-      onSnackbarShow(0);
-      setTimeout(() => onSnackbarHide(0), 1000);
+      if (id) {
+        clearTimeout(id);
+      }
+      showSnackbar(0);
+      id = setTimeout(() => hideSnackBar(0), 1000);
       break;
     case "remove":
-      onSnackbarShow(1);
-      setTimeout(() => onSnackbarHide(1), 1000);
+      if (id) {
+        console.log(id);
+        clearTimeout(id);
+      }
+      showSnackbar(1);
+      id = setTimeout(() => hideSnackBar(1), 1000);
       break;
   }
 }
