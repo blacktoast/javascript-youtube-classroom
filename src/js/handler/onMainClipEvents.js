@@ -60,7 +60,8 @@ function handleEmojiEvent(target) {
 export function initEmojisEvents() {
   $savedClipWrapper.addEventListener("click", (e) => {
     if (e.target.classList.contains("emojis")) {
-      handleEmojiEvent(e.target);
+	console.log(e);
+	    handleEmojiEvent(e.target);
     }
   });
 }
