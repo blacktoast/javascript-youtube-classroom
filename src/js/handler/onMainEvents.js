@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS } from '../utils/constant.js';
 import { $ } from '../utils/dom.js';
 import { hideScroll, showScroll } from '../utils/setAtribute.js';
 import { getItem } from '../utils/store.js';
-import { renderClipToMain } from '../view/renderMainSavedClip.js';
+import { renderClipToMain } from '../view/renderMainClip.js';
 import { initEmojisEvents } from './onMainClipEvents.js';
 
 const $body = document.querySelector('body');

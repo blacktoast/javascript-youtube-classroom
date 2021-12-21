@@ -50,10 +50,8 @@ function htmlSavedYoutubeClip(
 export function renderClipToMain(videoData, wrapper) {
   let template = "";
   videoData.map((item, i) => {
-    console.log(item);
     template += htmlSavedYoutubeClip(item, i);
   });
-  console.log(template);
   hideElement($savedClipNotfound);
   wrapper.innerHTML = template;
   if (videoData.length === 0) {

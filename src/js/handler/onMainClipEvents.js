@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
 import { $ } from "../utils/dom.js";
 import { hideElement, showElement } from "../utils/setAtribute.js";
 import { getItem, setItem } from "../utils/store.js";
-import { renderClipToMain } from "../view/renderMainSavedClip.js";
+import { renderClipToMain } from "../view/renderMainClip.js";
 import { renderSnackbar } from "../view/renderSnackBar.js";
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제

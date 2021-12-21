@@ -1,7 +1,7 @@
 import { LOCAL_STORAGE_KEYS } from '../utils/constant.js';
 import { $ } from '../utils/dom.js';
 import { getItem, getRecentKeywords } from '../utils/store.js';
-import { renderClipToMain } from './renderMainSavedClip.js';
+import { renderClipToMain } from './renderMainClip.js';
 import { renderStoredClipNumber } from './renderYoutubeClip.js';
 const $recentKeyword = $('.youtube-search-modal__recentKewords');
 const $savedClipWrapper = $(".main-savedClip-wrapper");
