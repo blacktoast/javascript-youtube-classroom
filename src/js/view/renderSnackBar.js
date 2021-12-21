@@ -13,10 +13,6 @@ const showSnackbar = (i) => {
   id2 = setTimeout(() => snackbars[i].classList.add("open"), 10);
 };
 const hideSnackBar = (i) => {
-  if (id2) {
-    console.log(id2);
-    clearTimeout(id2);
-  }
   snackbars[i].classList.remove("open");
   id2 = setTimeout(() => hideElement(snackbars[i]), 800);
 };
@@ -34,6 +30,7 @@ export function renderSnackbar(str) {
     case "store":
       if (id) {
         clearTimeout(id);
+        clearTimeout(id2);
       }
       showSnackbar(0);
       id = setTimeout(() => hideSnackBar(0), 1000);
@@ -42,6 +39,7 @@ export function renderSnackbar(str) {
       if (id) {
         console.log(id);
         clearTimeout(id);
+        clearTimeout(id2);
       }
       showSnackbar(1);
       id = setTimeout(() => hideSnackBar(1), 1000);
