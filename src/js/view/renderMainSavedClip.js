@@ -47,19 +47,18 @@ function htmlSavedYoutubeClip(
 </article>`;
 }
 
-export function renderClipToMain(videoData,wrapper) {
+export function renderClipToMain(videoData, wrapper) {
   let template = "";
-    console.log(videoData);
-    videoData.map((item, i) => {
-      template += htmlSavedYoutubeClip(item, i);
-    });
-    hideElement($savedClipNotfound);
-    wrapper.innerHTML = template;
-  if(videoData.length===0) {
+  videoData.map((item, i) => {
+    console.log(item);
+    template += htmlSavedYoutubeClip(item, i);
+  });
+  console.log(template);
+  hideElement($savedClipNotfound);
+  wrapper.innerHTML = template;
+  if (videoData.length === 0) {
     showElement($savedClipNotfound);
-    
   }
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
-

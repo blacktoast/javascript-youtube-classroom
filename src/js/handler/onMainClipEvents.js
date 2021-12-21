@@ -22,7 +22,7 @@ function handleDeleteSavedClip(target) {
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
   console.log(storedClips);
-  renderClipToMain(storedClips);
+  renderClipToMain(storedClips,$savedClipWrapper);
   handleRerenderStoreBtn(clipId);
 }
 
