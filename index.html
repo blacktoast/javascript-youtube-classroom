@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
- <head>
+  <head>
     <meta charset="UTF-8" />
     <title>👩🏻‍💻 유튜브 강의실</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,7 +13,9 @@
           <header class="my-4">
             <h2 class="text-center font-bold">👩🏻‍💻 나만의 유튜브 강의실 👨🏻‍💻</h2>
             <nav class="d-flex justify-center main-nav__btn">
-              <button class="btn bg-cyan-100 mx-1" data-nav-id="saved">👁️ 볼 영상</button>
+              <button class="btn bg-cyan-100 mx-1" data-nav-id="saved">
+                👁️ 볼 영상
+              </button>
               <button class="btn mx-1" data-nav-id="watched">✅ 본 영상</button>
               <button id="search-button" class="btn mx-1">
                 🔍 동영상 검색
@@ -28,9 +30,10 @@
               </section>
             </section>
             <section class="video-wrapper main-savedClip-wrapper"></section>
-            <section class="video-wrapper d-none main-watchedClip-wrapper"></section>
+            <section
+              class="video-wrapper d-none main-watchedClip-wrapper"
+            ></section>
           </main>
-          
         </div>
       </div>
       <div class="modal">
@@ -65,12 +68,7 @@
           </section>
           <section>
             <div
-              class="
-                d-flex
-                justify-end
-                text-gray-700
-                youtube-search-modal__storeVideoNumber
-              "
+              class="d-flex justify-end text-gray-700 youtube-search-modal__storeVideoNumber"
             >
               저장된 영상 갯수: 50개
             </div>
@@ -92,10 +90,7 @@
               class="youtube-search-modal__skeleton-wrapper d-none"
               data-js="youtube-search-modal__skeleton-wrapper"
             >
-              <section
-                class="video-wrapper "
-                id="skeleton-wrapper"
-              >
+              <section class="video-wrapper" id="skeleton-wrapper">
                 <article class="clip">
                   <div class="preview-container skeleton"></div>
                   <div class="content-container pt-2 px-1">
