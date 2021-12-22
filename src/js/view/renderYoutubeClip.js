@@ -1,15 +1,18 @@
-import { initScrollEvents } from '../handler/onModalScroll.js';
-import { $ } from '../utils/dom.js';
-import { hideElement, showElement } from '../utils/setAtribute.js';
+import { initScrollEvents } from "../handler/onModalScroll.js";
+import { $ } from "../utils/dom.js";
+import { hideElement, showElement } from "../utils/setAtribute.js";
 
-const $youtubeClipWrapper = $('.youtube-search-modal__clip');
-const $youtubeModalInner = $('.youtube-search-modal__inner');
-const $youtubeNotFound = $('.youtube-search-modal__not-found');
-const $recentKeyword = $('.youtube-search-modal__recentKewords');
-const $storedClipNumber = $('.youtube-search-modal__storeVideoNumber');
+const $youtubeClipWrapper = $(".youtube-search-modal__clip");
+const $youtubeModalInner = $(".youtube-search-modal__inner");
+const $youtubeNotFound = $(".youtube-search-modal__not-found");
+const $recentKeyword = $(".youtube-search-modal__recentKewords");
+const $storedClipNumber = $(".youtube-search-modal__storeVideoNumber");
 
-function htmlYoutubeClip({ clipId, channelId, title, channelName, time, overlapping }, index) {
-	return `<article class="clip youtube-search-modal-clip" data-clip-id="${clipId}">
+function htmlYoutubeClip(
+  { clipId, channelId, title, channelName, time, overlapping },
+  index
+) {
+  return `<article class="clip youtube-search-modal-clip" data-clip-id="${clipId}">
   <div
     class="preview-container"
     data-js="youtube-search-modal-clip__preview"
@@ -21,6 +24,7 @@ function htmlYoutubeClip({ clipId, channelId, title, channelName, time, overlapp
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      loading="lazy"
     ></iframe>
   </div>
   <div class="content-container pt-2 px-1">
@@ -37,7 +41,9 @@ function htmlYoutubeClip({ clipId, channelId, title, channelName, time, overlapp
         <p>${time[0]}년 ${time[1]}월 ${time[2]}일</p>
       </div>
       <div class="d-flex justify-end">
-        <button class="btn store-btn ${overlapping ? 'd-none' : ''}">⬇️ 저장</button>
+        <button class="btn store-btn ${
+          overlapping ? "d-none" : ""
+        }">⬇️ 저장</button>
       </div>
     </div>
   </div>
@@ -45,50 +51,50 @@ function htmlYoutubeClip({ clipId, channelId, title, channelName, time, overlapp
 }
 
 function htmlRecentKeywords(keywords) {
-	let template = '';
-	console.log(keywords);
-	template = `<a class="chip">${keywords[keywords.length - 1]}</a>`;
-	return template;
+  let template = "";
+  console.log(keywords);
+  template = `<a class="chip">${keywords[keywords.length - 1]}</a>`;
+  return template;
 }
 
 function renderRecentKeywords(keywords) {
-	let template = htmlRecentKeywords(keywords);
-	if (keywords.length > 2) {
-		let firstKeywords = document.querySelectorAll('.chip');
-		firstKeywords = firstKeywords[firstKeywords.length - 1];
-		firstKeywords.remove();
-	}
-	$recentKeyword.insertAdjacentHTML('afterend', template);
+  let template = htmlRecentKeywords(keywords);
+  if (keywords.length > 2) {
+    let firstKeywords = document.querySelectorAll(".chip");
+    firstKeywords = firstKeywords[firstKeywords.length - 1];
+    firstKeywords.remove();
+  }
+  $recentKeyword.insertAdjacentHTML("afterend", template);
 }
 
 export function renderYoutubeClip(videoData, keywords) {
-	let template = '';
-	console.log(videoData);
-	videoData.map((item, i) => {
-		template += htmlYoutubeClip(item, i);
-	});
+  let template = "";
+  console.log(videoData);
+  videoData.map((item, i) => {
+    template += htmlYoutubeClip(item, i);
+  });
 
-	$youtubeClipWrapper.innerHTML = template;
-	renderRecentKeywords(keywords);
+  $youtubeClipWrapper.innerHTML = template;
+  renderRecentKeywords(keywords);
 
-	// hideScroll($youtubeModalInner);
-	//setTimeout(() => showScroll($youtubeModalInner), 1000);
+  // hideScroll($youtubeModalInner);
+  //setTimeout(() => showScroll($youtubeModalInner), 1000);
 }
 export function renderStoredClipNumber(num) {
-	$storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString() || 0} 개`;
+  $storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString() || 0} 개`;
 }
 
 export function renderClipByScrollDown(videoData) {
-	let template = '';
-	videoData.map((item, i) => {
-		template += htmlYoutubeClip(item, i);
-	});
-	$youtubeClipWrapper.insertAdjacentHTML('beforeend', template);
-	initScrollEvents();
+  let template = "";
+  videoData.map((item, i) => {
+    template += htmlYoutubeClip(item, i);
+  });
+  $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
+  initScrollEvents();
 }
 
 export function renderOnMainSavedClip(savedClips) {}
 export function renderNotfound() {
-	hideElement($youtubeClipWrapper);
-	showElement($youtubeNotFound);
+  hideElement($youtubeClipWrapper);
+  showElement($youtubeNotFound);
 }

@@ -22,7 +22,7 @@ function handleDeleteSavedClip(target) {
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
   console.log(storedClips);
-  renderClipToMain(storedClips,$savedClipWrapper);
+  renderClipToMain(storedClips, $savedClipWrapper);
   handleRerenderStoreBtn(clipId);
 }
 
@@ -41,7 +41,20 @@ function handleRerenderStoreBtn(target) {
   });
 }
 
-function handleWatchedClip() {}
+function handleWatchedClip(target) {
+  let clip = target.closest(".main-youtube-clip");
+  let clipNumber = clip.dataset.clipId;
+  let watchedClipId = getItem(LOCAL_STORAGE_KEYS.WATECHED_CLIP_ID);
+  let watchedClips = getItem(LOCAL_STORAGE_KEYS.WATECHED_CLIP);
+  let clipId = watchedClipId[clipNumber];
+  watchedClipId.splice(clipNumber, 1);
+  watchedClips.splice(clipNumber, 1);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
+  console.log(storedClips);
+  renderClipToMain(storedClips, $savedClipWrapper);
+  handleRerenderStoreBtn(clipId);
+}
 
 function handleEmojiEvent(target) {
   switch (target.dataset.emojiType) {
@@ -60,8 +73,8 @@ function handleEmojiEvent(target) {
 export function initEmojisEvents() {
   $savedClipWrapper.addEventListener("click", (e) => {
     if (e.target.classList.contains("emojis")) {
-	console.log(e);
-	    handleEmojiEvent(e.target);
+      console.log(e);
+      handleEmojiEvent(e.target);
     }
   });
 }

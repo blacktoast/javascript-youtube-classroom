@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from "../utils/constant.js";
+import { getItem, setItem } from "../utils/store.js";
 
 export function storeNextPageToken(input) {
   console.log(input.nextPageToken);
@@ -19,6 +20,30 @@ export function getYoutubeClipInfo(youtubeSearchData) {
   });
   console.log(result);
   return result;
+}
+export function manufactureForStoreClip(target) {
+  let targetClip = target.closest(".youtube-search-modal-clip");
+  let container = targetClip.querySelector(".content-container");
+  let clipInfo = {
+    clipId: targetClip.querySelector("iframe").src.slice(39),
+    channelId: container.querySelector(".channel-name").href.slice(41),
+    title: container.querySelector("h3").innerText,
+    channelName: container.querySelector(".channel-name").innerText,
+    time: container.querySelector(".meta>p").innerText,
+  };
+  return clipInfo;
+}
+
+export function storeClipInfo(clipInfo) {
+  let clipId = clipInfo.clipId;
+  let storedClipId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID) || [];
+  let storedClipInfo = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO) || [];
+  console.log(storedClipInfo);
+  storedClipInfo.push(clipInfo);
+  storedClipId.push(clipId);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedClipId);
+  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClipInfo);
+  return;
 }
 
 export function storeTempClipInfo() {}

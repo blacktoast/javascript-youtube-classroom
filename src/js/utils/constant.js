@@ -15,4 +15,5 @@ export const LOCAL_STORAGE_KEYS = {
   STORE_CLIP_ID: "clipID",
   STORE_CLIP_INFO: "clipInfo",
   WATECHED_CLIP: "watchedClip",
+  WATECHED_CLIP_ID: "watchedClipId",
 };
