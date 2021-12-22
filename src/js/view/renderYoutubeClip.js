@@ -73,9 +73,11 @@ export function renderYoutubeClip(videoData, keywords) {
   videoData.map((item, i) => {
     template += htmlYoutubeClip(item, i);
   });
+  $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
 
-  $youtubeClipWrapper.innerHTML = template;
+  //$youtubeClipWrapper.innerHTML = template;
   renderRecentKeywords(keywords);
+  initScrollEvents();
 
   // hideScroll($youtubeModalInner);
   //setTimeout(() => showScroll($youtubeModalInner), 1000);

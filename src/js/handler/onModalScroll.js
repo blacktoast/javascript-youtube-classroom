@@ -36,7 +36,7 @@ function getObserverForScrollEvents() {
       };
       let videoData = await request(makeQueryString(query, BASE_URL));
       storeNextPageToken(videoData);
-      renderClipByScrollDown(getYoutubeClipInfo(videoData));
+      renderYoutubeClip(getYoutubeClipInfo(videoData));
       observer.unobserve(entries[0].target);
     }
   }, options);
