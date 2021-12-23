@@ -20,9 +20,9 @@ function handlerStoreEvents(target) {
   renderSnackbar("store");
   let clipInfo = manufactureForStoreClip(target);
   console.log(clipInfo);
-  storeClipInfo(clipInfo);
+  storeClipInfo(clipInfo, LOCAL_STORAGE_KEYS.STORE_CLIP_INFO);
   target.classList.add("d-none");
-  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID).length);
+  renderStoredClipNumber(getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO).length);
 }
 export function initClipStoreEvents() {
   $youtubeClipWrapper.addEventListener("click", (e) => {

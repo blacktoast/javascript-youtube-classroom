@@ -9,7 +9,7 @@ function htmlSavedYoutubeClip(
   index
 ) {
   console.log(time);
-  return `<article class="clip main-youtube-clip" data-clip-id="${index}">
+  return `<article class="clip main-youtube-clip youtube-search-modal-clip" data-clip-id="${index}">
   <div
     class="preview-container"
     data-js="youtube-main-savedClip__preview"

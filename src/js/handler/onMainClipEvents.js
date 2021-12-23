@@ -4,26 +4,25 @@ import { hideElement, showElement } from "../utils/setAtribute.js";
 import { getItem, setItem } from "../utils/store.js";
 import { renderClipToMain } from "../view/renderMainClip.js";
 import { renderSnackbar } from "../view/renderSnackBar.js";
+import { manufactureForStoreClip, storeClipInfo } from "./onModalCommon.js";
 /**
  * [] 휴지통 눌렀을때 저장된 클립 삭제
  * [] 체크 이모지 눌렀을때 본 클립으로 이동?
  */
 
 const $savedClipWrapper = $(".main-savedClip-wrapper");
+const $watchedClipWrapper = $(".main-watchedClip-wrapper");
 
 function handleDeleteSavedClip(target) {
   let clip = target.closest(".main-youtube-clip");
   let clipNumber = clip.dataset.clipId;
-  let storedId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID);
   let storedClips = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO);
-  let clipId = storedId[clipNumber];
-  storedId.splice(clipNumber, 1);
+  let clipId = storedClips[clipNumber];
   storedClips.splice(clipNumber, 1);
   setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
-  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
   console.log(storedClips);
   renderClipToMain(storedClips, $savedClipWrapper);
-  handleRerenderStoreBtn(clipId);
+  handleRerenderStoreBtn(storedClips.clipId);
 }
 
 function handleRerenderStoreBtn(target) {
@@ -43,17 +42,10 @@ function handleRerenderStoreBtn(target) {
 
 function handleWatchedClip(target) {
   let clip = target.closest(".main-youtube-clip");
-  let clipNumber = clip.dataset.clipId;
-  let watchedClipId = getItem(LOCAL_STORAGE_KEYS.WATECHED_CLIP_ID);
+  let clipInfo = manufactureForStoreClip(clip);
+  storeClipInfo(clipInfo, LOCAL_STORAGE_KEYS.WATECHED_CLIP);
   let watchedClips = getItem(LOCAL_STORAGE_KEYS.WATECHED_CLIP);
-  let clipId = watchedClipId[clipNumber];
-  watchedClipId.splice(clipNumber, 1);
-  watchedClips.splice(clipNumber, 1);
-  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClips);
-  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedId);
-  console.log(storedClips);
-  renderClipToMain(storedClips, $savedClipWrapper);
-  handleRerenderStoreBtn(clipId);
+  renderClipToMain(watchedClips, $watchedClipWrapper);
 }
 
 function handleEmojiEvent(target) {

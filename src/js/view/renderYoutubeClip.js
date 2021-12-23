@@ -86,6 +86,15 @@ export function renderStoredClipNumber(num) {
   $storedClipNumber.innerText = `저장된 영상 갯수: ${num.toString() || 0} 개`;
 }
 
+export function renderClipByScrollDown(videoData) {
+  let template = "";
+  videoData.map((item, i) => {
+    template += htmlYoutubeClip(item, i);
+  });
+  $youtubeClipWrapper.insertAdjacentHTML("beforeend", template);
+  initScrollEvents();
+}
+
 export function renderOnMainSavedClip(savedClips) {}
 export function renderNotfound() {
   hideElement($youtubeClipWrapper);

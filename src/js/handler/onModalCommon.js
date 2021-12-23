@@ -34,15 +34,11 @@ export function manufactureForStoreClip(target) {
   return clipInfo;
 }
 
-export function storeClipInfo(clipInfo) {
-  let clipId = clipInfo.clipId;
-  let storedClipId = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID) || [];
-  let storedClipInfo = getItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO) || [];
+export function storeClipInfo(clipInfo, key) {
+  let storedClipInfo = getItem(key) || [];
   console.log(storedClipInfo);
   storedClipInfo.push(clipInfo);
-  storedClipId.push(clipId);
-  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_ID, storedClipId);
-  setItem(LOCAL_STORAGE_KEYS.STORE_CLIP_INFO, storedClipInfo);
+  setItem(key, storedClipInfo);
   return;
 }
 
