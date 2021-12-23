@@ -3,7 +3,8 @@ import { hideElement, showElement } from "../utils/setAtribute.js";
 
 const $saveSnackBar = $(".snackBar-saveClip");
 const $removeSnackBar = $(".snackBar__remove__saveClip");
-const snackbars = [$saveSnackBar, $removeSnackBar];
+const $watchSnakBar = $(".snackBar__watch_clip");
+const snackbars = [$saveSnackBar, $removeSnackBar, $watchSnakBar];
 
 let id2;
 let id = "";

@@ -3,9 +3,9 @@
   display: flex;
   position: fixed;
   top: 15vw;
-  right: 0;
+  right: 40vw;
   bottom: 0;
-  left: 40vw;
+  left: 30vw;
   width: 15rem;
   height: 15rem;
   transition: opacity 0.3s ease;

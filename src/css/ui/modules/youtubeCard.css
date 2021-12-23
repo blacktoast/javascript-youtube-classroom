@@ -5,7 +5,16 @@
   grid-column-gap: 0.5rem;
   justify-content: center;
 }
-
+@media screen and (max-width: 768px) {
+  .video-wrapper {
+    grid-template-columns: repeat(auto-fill, 45vw);
+  }
+}
+@media screen and (max-width: 576px) {
+  .video-wrapper {
+    grid-template-columns: repeat(auto-fill, 50vw);
+  }
+}
 .clip {
   height: 15rem;
   cursor: pointer;

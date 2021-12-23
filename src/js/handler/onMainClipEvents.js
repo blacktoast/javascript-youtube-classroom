@@ -40,12 +40,23 @@ function handleRerenderStoreBtn(target) {
   });
 }
 
+function isOverlappingClip(clipId, dest) {
+  dest.map((e) => {
+    if (e.clipId === dest) return true;
+  });
+  return false;
+}
+
 function handleWatchedClip(target) {
   let clip = target.closest(".main-youtube-clip");
   let clipInfo = manufactureForStoreClip(clip);
-  storeClipInfo(clipInfo, LOCAL_STORAGE_KEYS.WATECHED_CLIP);
   let watchedClips = getItem(LOCAL_STORAGE_KEYS.WATECHED_CLIP);
-  renderClipToMain(watchedClips, $watchedClipWrapper);
+  if (!isOverlappingClip(clipInfo.clipId, watchedClips)) {
+    handleDeleteSavedClip(target);
+    storeClipInfo(clipInfo, LOCAL_STORAGE_KEYS.WATECHED_CLIP);
+    renderClipToMain(watchedClips, $watchedClipWrapper);
+    renderSnackbar("watch");
+  }
 }
 
 function handleEmojiEvent(target) {
